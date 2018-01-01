@@ -1,0 +1,21 @@
+
+html, body {
+    background: #777777;
+    height: 100%;
+    color: #333333;
+    font-family: inherit;
+    text-align: center;
+}
+
+h1 {
+    color: #666666;
+}
+
+
+#photonenGitarre{
+    font-size: 30px;
+}
+
+html, body {
+    height: 100%; padding: 0; margin: 0;
+}
