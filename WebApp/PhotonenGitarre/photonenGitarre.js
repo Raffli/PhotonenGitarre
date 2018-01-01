@@ -136,7 +136,7 @@ var select = document.getElementById("select")
 for(i = 0; i < allInstruments.length; i++)
 {
  var option = document.createElement("OPTION"),
-     txt = document.createTextNode(allInstruments[i]);
+     txt = document.createTextNode(allInstruments[i].charAt(0).toUpperCase() + allInstruments[i].slice(1).replace(/_/g," "));
  option.appendChild(txt);
  option.setAttribute("value",allInstruments[i]);
  select.insertBefore(option,select.lastChild);
