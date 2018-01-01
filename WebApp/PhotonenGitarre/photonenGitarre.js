@@ -130,18 +130,43 @@ var allInstruments = [
 ]
 var instrument
 var ac = new AudioContext()
+var select = document.getElementById("select")
 
+// Drop Down befüllen
+for(i = 0; i < allInstruments.length; i++)
+{
+ var option = document.createElement("OPTION"),
+     txt = document.createTextNode(allInstruments[i]);
+ option.appendChild(txt);
+ option.setAttribute("value",allInstruments[i]);
+ select.insertBefore(option,select.lastChild);
+}
 
-Soundfont.instrument(ac, allInstruments[100]).then(function (actualInstrument) {
+// Standart instrument initialisieren
+Soundfont.instrument(ac, allInstruments[30]).then(function (actualInstrument) {
   instrument = actualInstrument
 })
 
+select.value = select.options[30].value
+
+//Instrument wechseln
+select.addEventListener("change", changeInstrument);
+
+function changeInstrument(event){
+    ac.close()
+    ac = new AudioContext()
+    Soundfont.instrument(ac, allInstruments[select.selectedIndex]).then(function (actualInstrument) {
+        instrument = actualInstrument
+    })
+}
+
+// Note Spielen
 function playTone(event) {
     // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
     // event.data[1] = midi note
     // event.data[2] = velocity
     
     if (event.data[0] == 144)
-        instrument.play(event.data[1]).stop(ac.currentTime + 1)
+        instrument.play(event.data[1]).stop(ac.currentTime + 3)
     
 }
