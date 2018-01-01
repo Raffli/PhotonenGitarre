@@ -129,22 +129,19 @@ var allInstruments = [
   "xylophone"
 ]
 var instrument
-var Soundfont = require("../node_modules/soundfont-player/dist/soundfont-player")
 var ac = new AudioContext()
 
 
-// The first step is always create an instrument: 
-Soundfont.instrument(ac, allInstruments[22]).then(function (actualInstrument) {
+Soundfont.instrument(ac, allInstruments[100]).then(function (actualInstrument) {
   instrument = actualInstrument
-
 })
 
 function playTone(event) {
-    // event.data is an array
     // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
     // event.data[1] = midi note
     // event.data[2] = velocity
-    //console.log(event.data.toString());
-    instrument.play(event.data[1])
+    
+    if (event.data[0] == 144)
+        instrument.play(event.data[1]).stop(ac.currentTime + 1)
     
 }
