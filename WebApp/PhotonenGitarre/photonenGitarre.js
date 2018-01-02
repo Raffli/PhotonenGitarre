@@ -130,7 +130,6 @@ var allInstruments = [
 ];
 var instrument;
 var select = document.getElementById("select");
-var roomEffect = document.getElementById("convolverSelectList");
 var audioContext = new AudioContext();
 var convolver = audioContext.createConvolver();
 var selectedInstrument;

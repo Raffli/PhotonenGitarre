@@ -6,40 +6,41 @@
     </head>
     <body>
         <h1>Photonen Gitarre</h1>
-        <br>
-        <select id="select">
-        </select>
-        <div id="gainDiv">Volume
-            <input type="range" min="0" max="100" value="50" class="slider" id="gainSlider">
-            <span id="gainOutput" class="output">50</span>
-        </div>
-        <div id="attackDiv">Attack
-            <input type="range" min="0" max="100" value="10" class="slider" id="attackSlider">
-            <span id="attackOutput" class="output">0.1</span>
-        </div>
-        <div id="releaseDiv">Release
-            <input type="range" min="0" max="100" value="10" class="slider" id="releaseSlider">
-            <span id="releaseOutput" class="output">0.1</span>
-        </div>
-        <div id="durationDiv">Duration
-            <input type="range" min="0" max="500" value="100" class="slider" id="durationSlider">
-            <span id="durationOutput" class="output">1</span>
-        </div>
-        <div id="sustainDiv">Sustain
-            <input type="range" min="0" max="100" value="50" class="slider" id="sustainSlider">
-            <span id="sustainOutput" class="output">0.5</span>
-        </div>
-        <div id="decayDiv">Decay
-            <input type="range" min="0" max="100" value="50" class="slider" id="decaySlider">
-            <span id="decayOutput" class="output">0.5</span>
-        </div>
-        <div id="convolverDiv">Room Type
+        <div>
+            Instrument:
+            <select id="select">
+            </select>
+            Room Type:
             <select id="convolverSelectList">
                 <option value="room">Room</option>
                 <option value="cave">Cave</option>
                 <option value="church">Church</option>
                 <option value="garage">Garage</option>
             </select>
+        </div>
+        <p></p>
+        <div id="gainDiv">Volume:  <span id="gainOutput" class="output">50</span>
+            <input type="range" min="0" max="100" value="50" class="slider" id="gainSlider">
+        </div>
+        <p></p>
+        <div id="attackDiv">Attack: <span id="attackOutput" class="output">0.1</span>
+            <input type="range" min="0" max="100" value="10" class="slider" id="attackSlider">
+        </div>
+        <p></p>
+        <div id="releaseDiv">Release: <span id="releaseOutput" class="output">0.1</span>
+            <input type="range" min="0" max="100" value="10" class="slider" id="releaseSlider">
+        </div>
+        <p></p>
+        <div id="durationDiv">Duration: <span id="durationOutput" class="output">1</span>
+            <input type="range" min="0" max="500" value="100" class="slider" id="durationSlider">
+        </div>
+        <p></p>
+        <div id="sustainDiv">Sustain: <span id="sustainOutput" class="output">0.5</span>
+            <input type="range" min="0" max="100" value="50" class="slider" id="sustainSlider">
+        </div>
+        <p></p>
+        <div id="decayDiv">Decay: <span id="decayOutput" class="output">0.5</span>
+            <input type="range" min="0" max="100" value="50" class="slider" id="decaySlider">
         </div>
         <script src="bundle.js"></script>
         <script src="node_modules/soundfont-player/dist/soundfont-player.js"></script>
