@@ -130,7 +130,9 @@ var allInstruments = [
 ];
 var instrument;
 var select = document.getElementById("select");
+var roomEffect = document.getElementById("convolverSelectList");
 var audioContext = new AudioContext();
+var convolver = audioContext.createConvolver();
 var selectedInstrument;
 
 var gain = 0.5;
@@ -155,6 +157,8 @@ for(i = 0; i < allInstruments.length; i++)
 // Standart instrument initialisieren
 Soundfont.instrument(audioContext, allInstruments[30]).then(function (actualInstrument) {
     instrument = actualInstrument;
+    instrument.connect(convolver);
+    convolver.connect(audioContext.destination);
     instrumentActive = true;
 })
 select.value = select.options[30].value;
@@ -167,11 +171,15 @@ function changeInstrument(event){
     instrumentActive = false;
     audioContext.close();
     audioContext = new AudioContext();
+    convolver = audioContext.createConvolver();
     selectedInstrument = allInstruments[select.selectedIndex];
     Soundfont.instrument(audioContext, selectedInstrument).then(function (actualInstrument) {
-        instrument = actualInstrument;
+        instrument = actualInstrument; 
+        instrument.connect(convolver);
+        convolver.connect(audioContext.destination);
         instrumentActive = true;
     })
+
 }
 
 // Note Spielen

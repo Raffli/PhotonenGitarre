@@ -33,15 +33,24 @@
             <input type="range" min="0" max="100" value="50" class="slider" id="decaySlider">
             <span id="decayOutput" class="output">0.5</span>
         </div>
+        <div id="convolverDiv">Room Type
+            <select id="convolverSelectList">
+                <option value="room">Room</option>
+                <option value="cave">Cave</option>
+                <option value="church">Church</option>
+                <option value="garage">Garage</option>
+            </select>
+        </div>
         <script src="bundle.js"></script>
         <script src="node_modules/soundfont-player/dist/soundfont-player.js"></script>
         <script type="text/javascript" src= "PhotonenGitarre/photonenGitarre.js"></script>
         <script type="text/javascript" src= "PhotonenGitarre/midiReciver.js"></script>
-        <script type="text/javascript" src= "PhotonenGitarre/gain.js"></script>
-        <script type="text/javascript" src= "PhotonenGitarre/attack.js"></script>
-        <script type="text/javascript" src= "PhotonenGitarre/release.js"></script>
-        <script type="text/javascript" src= "PhotonenGitarre/duration.js"></script>
-        <script type="text/javascript" src= "PhotonenGitarre/sustain.js"></script>
-        <script type="text/javascript" src= "PhotonenGitarre/decay.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/gain.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/attack.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/release.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/duration.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/sustain.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/decay.js"></script>
+        <script type="text/javascript" src= "PhotonenGitarre/effects/convolver.js"></script>
     </body>
 </html>
