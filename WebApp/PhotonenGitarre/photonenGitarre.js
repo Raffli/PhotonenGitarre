@@ -127,10 +127,20 @@ var allInstruments = [
   "whistle",
   "woodblock",
   "xylophone"
-]
-var instrument
-var ac = new AudioContext()
-var select = document.getElementById("select")
+];
+var instrument;
+var select = document.getElementById("select");
+var audioContext = new AudioContext();
+var selectedInstrument;
+
+var gain = 0.5;
+var attack = 0.1;
+var release = 0.1;
+var duration = 2;
+var sustain = 0.5;
+var decay = 0.5;
+
+var instrumentActive = false;
 
 // Drop Down befüllen
 for(i = 0; i < allInstruments.length; i++)
@@ -143,20 +153,24 @@ for(i = 0; i < allInstruments.length; i++)
 }
 
 // Standart instrument initialisieren
-Soundfont.instrument(ac, allInstruments[30]).then(function (actualInstrument) {
-  instrument = actualInstrument
+Soundfont.instrument(audioContext, allInstruments[30]).then(function (actualInstrument) {
+    instrument = actualInstrument;
+    instrumentActive = true;
 })
-
-select.value = select.options[30].value
+select.value = select.options[30].value;
+selectedInstrument=allInstruments[select.selectedIndex]
 
 //Instrument wechseln
 select.addEventListener("change", changeInstrument);
 
 function changeInstrument(event){
-    ac.close()
-    ac = new AudioContext()
-    Soundfont.instrument(ac, allInstruments[select.selectedIndex]).then(function (actualInstrument) {
-        instrument = actualInstrument
+    instrumentActive = false;
+    audioContext.close();
+    audioContext = new AudioContext();
+    selectedInstrument = allInstruments[select.selectedIndex];
+    Soundfont.instrument(audioContext, selectedInstrument).then(function (actualInstrument) {
+        instrument = actualInstrument;
+        instrumentActive = true;
     })
 }
 
@@ -165,8 +179,7 @@ function playTone(event) {
     // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
     // event.data[1] = midi note
     // event.data[2] = velocity
-    
-    if (event.data[0] == 144)
-        instrument.play(event.data[1]).stop(ac.currentTime + 3)
+    if (event.data[0] == 144 && instrumentActive)
+        instrument.start(event.data[1],audioContext.currentTime,{gain:gain, attack:attack, release:release, sustain:sustain, deacay:decay }).stop(audioContext.currentTime + duration);
     
 }
