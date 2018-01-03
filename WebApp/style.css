@@ -18,16 +18,18 @@ h1 {
 .slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 100%;
+    width: 300px;
     height: 40px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin-top: 1em;
-    margin-bottom: 1em;
-
+    margin-top: 12em;
+    margin-bottom: 12em;
+    margin-right: 1em;
+    margin-left: -3.8em;
+    transform: rotate(-90deg);
 }
 
 .slider:hover {
@@ -41,6 +43,7 @@ h1 {
     height: 40px;
     background: #200100;
     cursor: pointer;
+    
 }
 
 
@@ -58,3 +61,57 @@ option {
   padding:.3em 1em .3em 1em;
 }
 
+#controlsDiv{
+    padding:2em 1em 1em 1em;
+    display: flex;
+    justify-content: center;
+}
+
+#gainDiv{
+    text-align:center;
+    align-content: center;
+    float: left;
+    width: 200px;
+    height:500px;
+    font-size:0.8
+}
+#attackDiv{
+    text-align:center;
+    align-content: center;
+    float: left;
+    width: 200px;
+    height:500px;
+    font-size:0.8
+}
+#releaseDiv{
+    text-align:center;
+    align-content: center;
+    float: left;
+    width: 200px;
+    height:500px;
+    font-size:0.8
+}
+#durationDiv{
+    text-align:center;
+    align-content: center;
+    float: left;
+    width: 200px;
+    height:500px;
+    font-size:0.8
+}
+#sustainDiv{
+    text-align:center;
+    align-content: center;
+    float: left;
+    width: 200px;
+    height:500px;
+    font-size:0.8
+}
+#decayDiv{
+    text-align:center;
+    align-content: center;
+    float: left;
+    width: 200px;
+    height:500px;
+    font-size:0.8
+}
