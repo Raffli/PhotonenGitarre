@@ -15,34 +15,36 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include <videowidget.h>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
 public:
-    QMenuBar *menuBar;
-    QToolBar *mainToolBar;
+    QAction *actionWebcam;
+    QAction *actionPlay;
     QWidget *centralWidget;
+    VideoWidget *inputFrame;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(mainToolBar);
+        MainWindow->resize(1310, 540);
+        actionWebcam = new QAction(MainWindow);
+        actionWebcam->setObjectName(QStringLiteral("actionWebcam"));
+        actionPlay = new QAction(MainWindow);
+        actionPlay->setObjectName(QStringLiteral("actionPlay"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        centralWidget->setAutoFillBackground(false);
+        inputFrame = new VideoWidget(centralWidget);
+        inputFrame->setObjectName(QStringLiteral("inputFrame"));
+        inputFrame->setGeometry(QRect(10, 10, 640, 480));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -55,7 +57,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "PhotonenGitarre", Q_NULLPTR));
+        actionWebcam->setText(QApplication::translate("MainWindow", "Webcam", Q_NULLPTR));
+        actionPlay->setText(QApplication::translate("MainWindow", "Play", Q_NULLPTR));
     } // retranslateUi
 
 };

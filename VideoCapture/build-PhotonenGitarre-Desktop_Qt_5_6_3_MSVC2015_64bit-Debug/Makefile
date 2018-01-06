@@ -197,6 +197,7 @@ Makefile: ..\PhotonenGitarre\PhotonenGitarre.pro C:\Qt\Qt5.6.3\5.6.3\msvc2015_64
 		C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\default_pre.prf \
 		C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\win32\default_pre.prf \
 		..\opencv\opencv.pri \
+		..\opencv\videoengine.pri \
 		C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\resolve_config.prf \
 		C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\exclusive_builds_post.prf \
 		C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\default_post.prf \
@@ -345,6 +346,7 @@ C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\exclusive_builds.prf:
 C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\default_pre.prf:
 C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\win32\default_pre.prf:
 ..\opencv\opencv.pri:
+..\opencv\videoengine.pri:
 C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\resolve_config.prf:
 C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\exclusive_builds_post.prf:
 C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\mkspecs\features\default_post.prf:

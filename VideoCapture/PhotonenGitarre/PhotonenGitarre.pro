@@ -19,4 +19,4 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-include(../opencv/opencv.pri)
+include(../opencv/videoengine.pri)
