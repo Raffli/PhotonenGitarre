@@ -27,6 +27,29 @@
      </rect>
     </property>
    </widget>
+   <widget class="VideoWidget" name="hsvFrame" native="true">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>10</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="position">
+    <property name="geometry">
+     <rect>
+      <x>6</x>
+      <y>500</y>
+      <width>571</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>x = 0; y = 0;</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionWebcam">

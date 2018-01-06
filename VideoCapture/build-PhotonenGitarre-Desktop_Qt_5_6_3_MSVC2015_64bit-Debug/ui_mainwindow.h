@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -28,6 +29,8 @@ public:
     QAction *actionPlay;
     QWidget *centralWidget;
     VideoWidget *inputFrame;
+    VideoWidget *hsvFrame;
+    QLabel *position;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -45,6 +48,12 @@ public:
         inputFrame = new VideoWidget(centralWidget);
         inputFrame->setObjectName(QStringLiteral("inputFrame"));
         inputFrame->setGeometry(QRect(10, 10, 640, 480));
+        hsvFrame = new VideoWidget(centralWidget);
+        hsvFrame->setObjectName(QStringLiteral("hsvFrame"));
+        hsvFrame->setGeometry(QRect(660, 10, 640, 480));
+        position = new QLabel(centralWidget);
+        position->setObjectName(QStringLiteral("position"));
+        position->setGeometry(QRect(6, 500, 571, 20));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -60,6 +69,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "PhotonenGitarre", Q_NULLPTR));
         actionWebcam->setText(QApplication::translate("MainWindow", "Webcam", Q_NULLPTR));
         actionPlay->setText(QApplication::translate("MainWindow", "Play", Q_NULLPTR));
+        position->setText(QApplication::translate("MainWindow", "x = 0; y = 0;", Q_NULLPTR));
     } // retranslateUi
 
 };
