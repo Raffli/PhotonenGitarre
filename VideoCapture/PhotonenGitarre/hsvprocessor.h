@@ -15,6 +15,26 @@ public:
     void setSaturationMin (const int value);
     void setValueMax (const int value);
     void setValueMin (const int value);
+    void saveCalibration ();
+
+    //Struct to define the attributes of the objects to be tracked.
+    typedef struct {
+        int x;
+        int y;
+        cv::Point center;
+        int hueMin = hueMin;
+        int hueMax = hueMax;
+        int saturationMin = saturationMin;
+        int saturationMax = saturationMax;
+        int valueMin = valueMin;
+        int valueMax = valueMax;
+        cv::Mat threshold;
+    }item ;
+
+    // Dynamic object who's attributes (specifically HSV) can be changed in real time.
+    item testObject;
+    // To store objects with defined values.
+    std::vector<item> objects;
 
 private:
     int hueMax;
@@ -24,9 +44,10 @@ private:
     int valueMax;
     int valueMin;
     cv::Point center;
-    cv::Mat colorKeying (cv::Mat& hsvFrame);
-    void findCenterOfObject(cv::Mat& image);
+    cv::Mat colorKeying (cv::Mat& hsvFrame, item& currentItem);
+    void findCenterOfObject(cv::Mat& image, item& currentItem);
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
+    item setUpItemObject(int x, int y, cv::Point center, int hmin, int hmax, int smin, int smax, int vmin, int vmax);
 };
 
 #endif // HSVPROCESSOR_H

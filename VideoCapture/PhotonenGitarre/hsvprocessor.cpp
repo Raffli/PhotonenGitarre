@@ -5,10 +5,10 @@ using namespace cv;
 using namespace std;
 
 HSVProcessor::HSVProcessor():
-    hueMax(70),
-    hueMin(50),
+    hueMax(180),
+    hueMin(0),
     saturationMax(255),
-    saturationMin(200),
+    saturationMin(0),
     valueMax(255),
     valueMin(0)
 {
@@ -21,23 +21,35 @@ cv::Mat HSVProcessor::process(const cv::Mat &input) {
     cvtColor(input, hsvFrame, CV_BGR2HSV);
 
     //initialize for output
-    Mat binaryMask = colorKeying(hsvFrame);
+    testObject.threshold = colorKeying(hsvFrame, testObject);
 
-    medianBlur(binaryMask, binaryMask, 5);
+    medianBlur(testObject.threshold, testObject.threshold, 5);
 
-    erode(binaryMask, binaryMask, Mat());
-    dilate(binaryMask, binaryMask, Mat());
+    erode(testObject.threshold, testObject.threshold, Mat());
+    dilate(testObject.threshold, testObject.threshold, Mat());
 
-    findCenterOfObject(binaryMask);
+    findCenterOfObject(testObject.threshold, testObject);
 
     Mat output;
-    cvtColor(binaryMask, output, CV_GRAY2BGR);
-    drawCross(output, center, 5, Scalar(0, 0, 255));
+    cvtColor(testObject.threshold, output, CV_GRAY2BGR);
+    drawCross(output, testObject.center, 5, Scalar(0, 0, 255));
+
+    for (unsigned int i = 0; i<objects.size(); i++) {
+        objects[i].threshold = colorKeying(hsvFrame, objects[i]);
+        medianBlur(objects[i].threshold, objects[i].threshold, 5);
+
+        erode(objects[i].threshold, objects[i].threshold, Mat());
+        dilate(objects[i].threshold, objects[i].threshold, Mat());
+
+        findCenterOfObject(objects[i].threshold, objects[i]);
+        qDebug() << objects[i].x << " " << objects[i].y;
+        drawCross(output, objects[i].center, 5, Scalar(0, 0, 255));
+    }
 
     return output;
 }
 
-Mat HSVProcessor::colorKeying(Mat &hsvFrame) {
+Mat HSVProcessor::colorKeying(Mat &hsvFrame, item &currentItem) {
     Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
     for (int x = 0; x < hsvFrame.cols; x++) {
         for (int y = 0; y < hsvFrame.rows; y++) {
@@ -47,9 +59,9 @@ Mat HSVProcessor::colorKeying(Mat &hsvFrame) {
             int value = hsvPixel[2];
 
             bool isWhite = false;
-            if ((saturation >= saturationMin)
-                    && (hue >= hueMin && hue <= hueMax)
-                    && (value >= valueMin && value <= valueMax)) {
+            if ((saturation >= currentItem.saturationMin)
+                    && (hue >= currentItem.hueMin && hue <= currentItem.hueMax)
+                    && (value >= currentItem.valueMin && value <= currentItem.valueMax)) {
                     isWhite = true;
             }
 
@@ -64,7 +76,7 @@ Mat HSVProcessor::colorKeying(Mat &hsvFrame) {
     return output;
 }
 
-void HSVProcessor::findCenterOfObject(Mat &image){
+void HSVProcessor::findCenterOfObject(Mat &image, item &currentItem){
     // analyse all pixels
     int whitePixels = 0;
     int sumX = 0;
@@ -81,8 +93,13 @@ void HSVProcessor::findCenterOfObject(Mat &image){
     }
 
     if (whitePixels > 0) {
-        center = Point(sumX/whitePixels, sumY/whitePixels);
+        currentItem.x = sumX/whitePixels;
+        currentItem.y = sumY/whitePixels;
+    } else {
+        currentItem.x = -100;
+        currentItem.y = -100;
     }
+    currentItem.center = Point(currentItem.x, currentItem.y);
 }
 
 void HSVProcessor::drawCross(Mat &image, Point center, int length, Scalar color) {
@@ -90,32 +107,58 @@ void HSVProcessor::drawCross(Mat &image, Point center, int length, Scalar color)
     line(image, center - Point(length, 0), center + Point(length, 0), color, 1);
 }
 
+HSVProcessor::item HSVProcessor::setUpItemObject (int x, int y, cv::Point center, int hmin, int hmax, int smin, int smax, int vmin, int vmax) {
+    item temp;
+    temp.x = x;
+    temp.y = y;
+    temp.center = center;
+    temp.hueMin = hmin;
+    temp.hueMax = hmax;
+    temp.saturationMin = smin;
+    temp.saturationMax = smax;
+    temp.valueMin = vmin;
+    temp.valueMax = vmax;
+    qDebug() << "save";
+    return temp;
+}
+
+void HSVProcessor::saveCalibration(){
+    objects.push_back(setUpItemObject(testObject.x, testObject.y, testObject.center, testObject.hueMin, testObject.hueMax,
+                                      testObject.saturationMin, testObject.saturationMax, testObject.valueMin, testObject.valueMax));
+}
+
 void HSVProcessor::setHueMax(const int value){
     hueMax = value/2;
+    testObject.hueMax = hueMax;
     qDebug() << hueMax;
 }
 
 void HSVProcessor::setHueMin(const int value){
     hueMin = value/2;
+    testObject.hueMin = hueMin;
     qDebug() << hueMin;
 }
 
 void HSVProcessor::setSaturationMax(const int value){
     saturationMax = 255 * value / 100;
+    testObject.saturationMax = saturationMax;
     qDebug() << saturationMax;
 }
 
 void HSVProcessor::setSaturationMin(const int value){
     saturationMin = 255 * value / 100;
+    testObject.saturationMin = saturationMin;
     qDebug() << saturationMin;
 }
 
 void HSVProcessor::setValueMax(const int value){
     valueMax = 255 * value / 100;
+    testObject.valueMax = valueMax;
     qDebug() << valueMax;
 }
 
 void HSVProcessor::setValueMin(const int value){
     valueMin = 255 * value / 100;
+    testObject.valueMin = valueMin;
     qDebug() << valueMin;
 }

@@ -16,6 +16,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -43,6 +44,7 @@ public:
     QLabel *valueMinLabel;
     QSpinBox *valueMinValue;
     QSpinBox *valueMaxValue;
+    QPushButton *saveButton;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -108,6 +110,14 @@ public:
         valueMaxValue->setGeometry(QRect(410, 530, 43, 22));
         valueMaxValue->setMaximum(100);
         valueMaxValue->setValue(100);
+        saveButton = new QPushButton(centralWidget);
+        saveButton->setObjectName(QStringLiteral("saveButton"));
+        saveButton->setGeometry(QRect(510, 500, 100, 52));
+        QFont font;
+        font.setPointSize(20);
+        saveButton->setFont(font);
+        saveButton->setAutoDefault(false);
+        saveButton->setFlat(false);
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -129,6 +139,7 @@ public:
         saturationMaxLabel->setText(QApplication::translate("MainWindow", "Saturation-Max:", Q_NULLPTR));
         valueMaxLabel->setText(QApplication::translate("MainWindow", "Value-Max:", Q_NULLPTR));
         valueMinLabel->setText(QApplication::translate("MainWindow", "Value-Min:", Q_NULLPTR));
+        saveButton->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
     } // retranslateUi
 
 };

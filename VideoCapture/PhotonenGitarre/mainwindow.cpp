@@ -57,3 +57,8 @@ void MainWindow::on_valueMinValue_valueChanged(int arg1)
 {
     hsvProcessor->setValueMin(arg1);
 }
+
+void MainWindow::on_saveButton_clicked()
+{
+    hsvProcessor->saveCalibration();
+}
