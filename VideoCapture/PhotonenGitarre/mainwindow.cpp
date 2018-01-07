@@ -27,3 +27,33 @@ MainWindow::~MainWindow()
     delete hsvProcessor;
     delete ui;
 }
+
+void MainWindow::on_hueMaxValue_valueChanged(int arg1)
+{
+    hsvProcessor->setHueMax(arg1);
+}
+
+void MainWindow::on_hueMinValue_valueChanged(int arg1)
+{
+    hsvProcessor->setHueMin(arg1);
+}
+
+void MainWindow::on_saturationMaxValue_valueChanged(int arg1)
+{
+    hsvProcessor->setSaturationMax(arg1);
+}
+
+void MainWindow::on_saturationMinValue_valueChanged(int arg1)
+{
+    hsvProcessor->setSaturationMin(arg1);
+}
+
+void MainWindow::on_valueMaxValue_valueChanged(int arg1)
+{
+    hsvProcessor->setValueMax(arg1);
+}
+
+void MainWindow::on_valueMinValue_valueChanged(int arg1)
+{
+    hsvProcessor->setValueMin(arg1);
+}

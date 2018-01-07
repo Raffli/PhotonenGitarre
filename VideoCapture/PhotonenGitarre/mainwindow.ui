@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1310</width>
-    <height>540</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,17 +37,169 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="position">
+   <widget class="QLabel" name="hueMinLabel">
     <property name="geometry">
      <rect>
-      <x>6</x>
+      <x>10</x>
       <y>500</y>
-      <width>571</width>
-      <height>20</height>
+      <width>50</width>
+      <height>22</height>
      </rect>
     </property>
     <property name="text">
-     <string>x = 0; y = 0;</string>
+     <string>Hue-Min:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="hueMinValue">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>500</y>
+      <width>43</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="hueMaxLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>530</y>
+      <width>47</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hue-Max:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="hueMaxValue">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>530</y>
+      <width>43</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="value">
+     <number>360</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="saturationMinLabel">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>500</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Saturation-Min:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="saturationMaxLabel">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>530</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Saturation-Max:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="saturationMinValue">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>500</y>
+      <width>43</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="saturationMaxValue">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>530</y>
+      <width>43</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="value">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="valueMaxLabel">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>530</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Value-Max:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="valueMinLabel">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>500</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Value-Min:</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="valueMinValue">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>500</y>
+      <width>43</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="valueMaxValue">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>530</y>
+      <width>43</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="value">
+     <number>100</number>
     </property>
    </widget>
   </widget>

@@ -18,6 +18,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_hueMaxValue_valueChanged(int arg1);
+
+    void on_hueMinValue_valueChanged(int arg1);
+
+    void on_saturationMaxValue_valueChanged(int arg1);
+
+    void on_saturationMinValue_valueChanged(int arg1);
+
+    void on_valueMaxValue_valueChanged(int arg1);
+
+    void on_valueMinValue_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     VideoEngine *videoThread;
