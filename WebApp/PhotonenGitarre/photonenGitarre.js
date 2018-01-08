@@ -186,7 +186,7 @@ function playTone(event) {
     // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
     // event.data[1] = midi note
     // event.data[2] = velocity
-    if (event.data[0] == 144 && instrumentActive)
+    if (event.data[0] == 145 && instrumentActive)
         instrument.start(event.data[1],audioContext.currentTime,{gain:gain, attack:attack, release:release, sustain:sustain, deacay:decay }).stop(audioContext.currentTime + duration);
     
 }
