@@ -1,19 +1,80 @@
 
-html, body {
-    background: #324582;
-    height: 100%;
-    color: #0099ff;
+html{
+    color: #000;
     font-family: sans-serif;
     text-align: center;
     height: 90%;
     font-size: 1.6em;
+    background-color: rgba(1,1,1,0.3);
 }
 
+
 h1 {
-    color: #0099cc;
     font-size: 2em;
 }
 
+.background{
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+
+}
+
+#redDiv{
+    background-color: #e60000;
+    float: left;
+    width: 12%;
+    height:100%;
+    opacity: 0.3;
+}
+#greenDiv{
+    background-color: #00cc66;
+    float: left;
+    width: 12%;
+    height:100%;
+    opacity: 0.3;
+    float: left;
+    margin-left: 20px;
+
+}
+#blueDiv{
+    background-color: #3333ff;
+    float: left;
+    width: 12%;
+    height:100%;
+    opacity: 0.3;
+    margin-left: 20px;
+
+}
+#yellowDiv{
+    background-color: #ffff66;
+    float: left;
+    width: 12%;
+    height:100%;
+    opacity: 0.3;
+    margin-left: 20px;
+
+}
+#cyanDiv{
+    background-color: #33ffff;
+    float: left;
+    width: 12%;
+    height:100%;
+    opacity: 0.3;
+    margin-left: 20px;
+
+}
+#magentaDiv{
+    background-color: #cc00cc;
+    float: left;
+    width: 12%;
+    height:100%;
+    opacity: 0.3;
+    margin-left: 20px;
+
+}
 
 .slider {
     -webkit-appearance: none;
@@ -22,7 +83,7 @@ h1 {
     height: 40px;
     background: #d3d3d3;
     outline: none;
-    opacity: 0.7;
+    opacity: 0.9;
     -webkit-transition: .2s;
     transition: opacity .2s;
     margin-top: 12em;
@@ -41,28 +102,26 @@ h1 {
     appearance: none;
     width: 40px;
     height: 40px;
-    background: #200100;
+    background: #111;
     cursor: pointer;
     
 }
 
-
 select {
   border: none;
-  background-color:#324560;
-  color:#0099ff;
+  background-color:#ddd;
   font-size: 1em;
     
 }
 
 option {
-  background:#324590;
+  background:#ddd;
   border-top:1px solid #444;
   padding:.3em 1em .3em 1em;
 }
 
 #controlsDiv{
-    padding:2em 1em 1em 1em;
+    padding:2em 0em 1em 0em;
     display: flex;
     justify-content: center;
 }
@@ -72,7 +131,7 @@ option {
     align-content: center;
     float: left;
     width: 200px;
-    height:500px;
+    height:460px;
     font-size:0.8
 }
 #attackDiv{
@@ -80,7 +139,7 @@ option {
     align-content: center;
     float: left;
     width: 200px;
-    height:500px;
+    height:460px;
     font-size:0.8
 }
 #releaseDiv{
@@ -88,7 +147,7 @@ option {
     align-content: center;
     float: left;
     width: 200px;
-    height:500px;
+    height:460px;
     font-size:0.8
 }
 #durationDiv{
@@ -96,7 +155,7 @@ option {
     align-content: center;
     float: left;
     width: 200px;
-    height:500px;
+    height:460px;
     font-size:0.8
 }
 #sustainDiv{
@@ -104,7 +163,7 @@ option {
     align-content: center;
     float: left;
     width: 200px;
-    height:500px;
+    height:460px;
     font-size:0.8
 }
 #decayDiv{
@@ -112,6 +171,6 @@ option {
     align-content: center;
     float: left;
     width: 200px;
-    height:500px;
+    height:460px;
     font-size:0.8
 }

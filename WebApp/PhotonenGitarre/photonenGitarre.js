@@ -130,6 +130,14 @@ var allInstruments = [
 ];
 var instrument;
 var select = document.getElementById("select");
+var reddiv = document.getElementById( "redDiv" );
+var greendiv = document.getElementById( "greenDiv" );
+var bluediv = document.getElementById( "blueDiv" );
+var yellowdiv = document.getElementById( "yellowDiv" );
+var cyandiv = document.getElementById( "cyanDiv" );
+var magentadiv = document.getElementById( "magentaDiv" );
+var defaultOpacity = 0.3;
+
 var audioContext = new AudioContext();
 var convolver = audioContext.createConvolver();
 var selectedInstrument;
@@ -181,12 +189,52 @@ function changeInstrument(event){
 
 }
 
+function showColor(event){
+    if (event.data[1] < 48){
+        reddiv.style.opacity = 1;
+        reddiv.style.boxShadow = "0px 0px 100px rgba(255, 0, 0, 1)";
+
+        setTimeout(function(){  reddiv.style.opacity = defaultOpacity, reddiv.style.boxShadow = "none";
+;
+        }, duration*500);
+    }
+    else if(event.data[1] < 60){
+        greendiv.style.opacity = 1;
+        greendiv.style.boxShadow = "0px 0px 100px rgba(0, 255, 0, 1)";
+
+        setTimeout(function(){greendiv.style.opacity = defaultOpacity, greendiv.style.boxShadow = "none";
+}, duration*500);
+    }
+    else if(event.data[1] < 72){
+        bluediv.style.opacity = 1;
+        bluediv.style.boxShadow = "0px 0px 100px rgba(0, 0, 255, 1)";
+        setTimeout(function(){bluediv.style.opacity = defaultOpacity, bluediv.style.boxShadow = "none";
+}, duration*500);
+    }
+    else if(event.data[1] < 84){
+        yellowdiv.style.opacity = 1;
+        yellowdiv.style.boxShadow = "0px 0px 100px yellow";
+        setTimeout(function(){yellowdiv.style.opacity = defaultOpacity, yellowdiv.style.boxShadow = "none";
+}, duration*500);
+    }
+    else if(event.data[1] < 96){
+        cyandiv.style.opacity = 1;
+        cyandiv.style.boxShadow = "0px 0px 100px cyan";
+
+        setTimeout(function(){cyandiv.style.opacity = defaultOpacity, cyandiv.style.boxShadow = "none";
+}, duration*500);
+    }
+    else{
+        magentadiv.style.opacity = 1;
+        magentadiv.style.boxShadow = "0px 0px 100px magenta";
+
+        setTimeout(function(){magentadiv.style.opacity = defaultOpacity, magentadiv.style.boxShadow = "none"}, duration*500);
+    }
+}
+
 // Note Spielen
 function playTone(event) {
-    // event.data[0] = on (144) / off (128) / controlChange (176)  / pitchBend (224) / ...
-    // event.data[1] = midi note
-    // event.data[2] = velocity
-    if (event.data[0] == 145 && instrumentActive)
+    if (event.data[0] == 145 ||event.data[0] == 144 && instrumentActive)
         instrument.start(event.data[1],audioContext.currentTime,{gain:gain, attack:attack, release:release, sustain:sustain, deacay:decay }).stop(audioContext.currentTime + duration);
-    
+    showColor(event);
 }
