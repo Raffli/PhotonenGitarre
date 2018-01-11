@@ -28,7 +28,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: -20px;
+    margin-left: -40px;
 
 }
 #greenDiv{
@@ -38,7 +38,7 @@ h1 {
     height:100%;
     opacity: 0.2;
     float: left;
-    margin-left: 20px;
+    margin-left: 40px;
 
 }
 #blueDiv{
@@ -47,7 +47,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: 20px;
+    margin-left: 40px;
 
 }
 #yellowDiv{
@@ -56,7 +56,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: 20px;
+    margin-left: 40px;
 
 }
 #cyanDiv{
@@ -65,7 +65,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: 20px;
+    margin-left: 40px;
 
 }
 #magentaDiv{
@@ -74,7 +74,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: 20px;
+    margin-left: 40px;
 
 }
 

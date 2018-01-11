@@ -219,7 +219,7 @@ function showColor(event){
     }
     else if(event.data[1] < 96){
         cyandiv.style.opacity = 1;
-        cyandiv.style.boxShadow = "0px 0px 100px cyan";
+        cyandiv.style.boxShadow = "0px 0px 100px rgba(0, 230, 230,1)";
 
         setTimeout(function(){cyandiv.style.opacity = defaultOpacity, cyandiv.style.boxShadow = "none";
 }, duration*500);
