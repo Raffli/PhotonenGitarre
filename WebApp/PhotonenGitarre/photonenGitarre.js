@@ -136,7 +136,7 @@ var bluediv = document.getElementById( "blueDiv" );
 var yellowdiv = document.getElementById( "yellowDiv" );
 var cyandiv = document.getElementById( "cyanDiv" );
 var magentadiv = document.getElementById( "magentaDiv" );
-var defaultOpacity = 0.3;
+var defaultOpacity = 0.2;
 
 var audioContext = new AudioContext();
 var convolver = audioContext.createConvolver();
