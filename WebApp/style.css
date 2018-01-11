@@ -5,7 +5,7 @@ html{
     text-align: center;
     height: 90%;
     font-size: 1.6em;
-    background-color: rgba(1,1,1,0.3);
+    background-color: rgba(1,1,1,0.5);
 }
 
 
@@ -83,7 +83,7 @@ h1 {
     appearance: none;
     width: 300px;
     height: 40px;
-    background: #d3d3d3;
+    background: #bbb;
     outline: none;
     opacity: 0.9;
     -webkit-transition: .2s;
@@ -104,20 +104,20 @@ h1 {
     appearance: none;
     width: 40px;
     height: 40px;
-    background: #111;
+    background: #555;
     cursor: pointer;
     
 }
 
 select {
   border: none;
-  background-color:#ddd;
+  background-color:#bbb;
   font-size: 1em;
     
 }
 
 option {
-  background:#ddd;
+  background:#bbb;
   border-top:1px solid #444;
   padding:.3em 1em .3em 1em;
 }
