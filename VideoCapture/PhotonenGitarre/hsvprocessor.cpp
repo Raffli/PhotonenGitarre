@@ -1,5 +1,6 @@
 #include "hsvprocessor.h"
 #include <QDebug>
+#include <string>
 
 using namespace cv;
 using namespace std;
@@ -10,7 +11,13 @@ HSVProcessor::HSVProcessor():
     saturationMax(255),
     saturationMin(0),
     valueMax(255),
-    valueMin(0)
+    valueMin(0),
+    blueChecked(false),
+    cyanChecked(false),
+    greenChecked(false),
+    magentaChecked(false),
+    redChecked(false),
+    yellowChecked(false)
 {
     midiOutput.open("LoopBe Internal MIDI");
 }
@@ -21,7 +28,7 @@ cv::Mat HSVProcessor::process(cv::Mat &input) {
     cvtColor(input, hsvFrame, CV_BGR2HSV);
 
     //initialize for output
-    testObject.threshold = colorKeying(hsvFrame, testObject);
+    testObject.threshold = colorKeying(hsvFrame, testObject, 0, hsvFrame.cols);
 
     medianBlur(testObject.threshold, testObject.threshold, 5);
 
@@ -34,8 +41,28 @@ cv::Mat HSVProcessor::process(cv::Mat &input) {
     cvtColor(testObject.threshold, output, CV_GRAY2BGR);
     drawCross(output, testObject.center, 5, Scalar(0, 0, 255));
 
-    for (unsigned int i = 0; i<objects.size(); i++) {
-        objects[i].threshold = colorKeying(hsvFrame, objects[i]);
+    for (int i = 0; i<objects.size(); i++) {
+        int startCol, endCol;
+        if (objects[i].color == "red") {
+            startCol = 0;
+            endCol = hsvFrame.cols / 6;
+        } else if (objects[i].color == "green") {
+            startCol = hsvFrame.cols / 6;
+            endCol = hsvFrame.cols / 6 * 2;
+        } else if (objects[i].color == "blue") {
+            startCol = 2 * hsvFrame.cols / 6;
+            endCol = hsvFrame.cols / 6 * 3;
+        } else if (objects[i].color == "yellow") {
+            startCol = 3 * hsvFrame.cols / 6;
+            endCol = hsvFrame.cols / 6 * 4;
+        } else if (objects[i].color == "cyan") {
+            startCol = 4 * hsvFrame.cols / 6;
+            endCol = hsvFrame.cols / 6 * 5;
+        } else if (objects[i].color == "magenta") {
+            startCol = 5 * hsvFrame.cols / 6;
+            endCol = hsvFrame.cols;
+        }
+        objects[i].threshold = colorKeying(hsvFrame, objects[i], startCol, endCol);
         medianBlur(objects[i].threshold, objects[i].threshold, 5);
 
         erode(objects[i].threshold, objects[i].threshold, Mat());
@@ -43,18 +70,19 @@ cv::Mat HSVProcessor::process(cv::Mat &input) {
 
         findCenterOfObject(objects[i].threshold, objects[i]);
         if (objects[i].y > 0) {
-            midiOutput.sendNoteOn(1, objects[i].y / 4, 127);
+            midiOutput.sendNoteOn(1, objects[i].startMidiNote + objects[i].y / 40, 127);
         }
         drawCross(input, objects[i].center, 5, Scalar(0, 0, 255));
+        drawColorNames(input, objects[i].color, objects[i].center);
     }
     drawGridLines(input);
 
     return output;
 }
 
-Mat HSVProcessor::colorKeying(Mat &hsvFrame, item &currentItem) {
+Mat HSVProcessor::colorKeying(Mat &hsvFrame, item &currentItem, const int startCol, const int endCol) {
     Mat output(hsvFrame.rows, hsvFrame.cols, CV_8UC1);
-    for (int x = 0; x < hsvFrame.cols; x++) {
+    for (int x = startCol; x < endCol; x++) {
         for (int y = 0; y < hsvFrame.rows; y++) {
             Vec3b hsvPixel = hsvFrame.at<Vec3b>(y,x);
             int hue = hsvPixel[0];
@@ -117,8 +145,15 @@ void HSVProcessor::drawGridLines (Mat &image) {
     }
 }
 
-HSVProcessor::item HSVProcessor::setUpItemObject (int x, int y, cv::Point center, int hmin, int hmax, int smin, int smax, int vmin, int vmax) {
+void HSVProcessor::drawColorNames(Mat &image, QString color, Point center){
+    putText(image, color.toStdString(), center, 1, 1, Scalar(0, 0, 255));
+}
+
+HSVProcessor::item HSVProcessor::setUpItemObject (int x, int y, cv::Point center, int hmin, int hmax, int smin,
+                                                  int smax, int vmin, int vmax, QString color, int startMidiNote) {
     item temp;
+    temp.color = color;
+    temp.startMidiNote = startMidiNote;
     temp.x = x;
     temp.y = y;
     temp.center = center;
@@ -128,13 +163,35 @@ HSVProcessor::item HSVProcessor::setUpItemObject (int x, int y, cv::Point center
     temp.saturationMax = smax;
     temp.valueMin = vmin;
     temp.valueMax = vmax;
-    qDebug() << "save";
+    qDebug().nospace() << qPrintable(color);
     return temp;
 }
 
 void HSVProcessor::saveCalibration(){
+    QString color;
+    int startMidiNote;
+    if (redChecked) {
+        color = "red";
+        startMidiNote = 36;
+    } else if (greenChecked) {
+        color = "green";
+        startMidiNote = 48;
+    } else if (blueChecked) {
+        color = "blue";
+        startMidiNote = 60;
+    } else if (yellowChecked) {
+        color = "yellow";
+        startMidiNote = 72;
+    } else if (cyanChecked) {
+        color = "cyan";
+        startMidiNote = 84;
+    } else if (magentaChecked) {
+        color = "magenta";
+        startMidiNote = 96;
+    }
     objects.push_back(setUpItemObject(testObject.x, testObject.y, testObject.center, testObject.hueMin, testObject.hueMax,
-                                      testObject.saturationMin, testObject.saturationMax, testObject.valueMin, testObject.valueMax));
+                                      testObject.saturationMin, testObject.saturationMax, testObject.valueMin, testObject.valueMax,
+                                      color, startMidiNote));
 }
 
 void HSVProcessor::setHueMax(const int value){
@@ -171,4 +228,28 @@ void HSVProcessor::setValueMin(const int value){
     valueMin = 255 * value / 100;
     testObject.valueMin = valueMin;
     qDebug() << valueMin;
+}
+
+void HSVProcessor::setBlue(const bool checked){
+    blueChecked = checked;
+}
+
+void HSVProcessor::setCyan(const bool checked){
+    cyanChecked = checked;
+}
+
+void HSVProcessor::setGreen(const bool checked){
+    greenChecked = checked;
+}
+
+void HSVProcessor::setMagenta(const bool checked){
+    magentaChecked = checked;
+}
+
+void HSVProcessor::setRed(const bool checked){
+    redChecked = checked;
+}
+
+void HSVProcessor::setYellow(const bool checked){
+    yellowChecked = checked;
 }

@@ -33,6 +33,18 @@ private slots:
 
     void on_saveButton_clicked();
 
+    void on_blueButton_toggled(bool checked);
+
+    void on_cyanButton_toggled(bool checked);
+
+    void on_greenButton_toggled(bool checked);
+
+    void on_magentaButton_toggled(bool checked);
+
+    void on_redButton_toggled(bool checked);
+
+    void on_yellowButton_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     VideoEngine *videoThread;

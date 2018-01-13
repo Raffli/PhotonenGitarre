@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "qdebug.h"
+
 
 using namespace cv;
 
@@ -61,4 +63,46 @@ void MainWindow::on_valueMinValue_valueChanged(int arg1)
 void MainWindow::on_saveButton_clicked()
 {
     hsvProcessor->saveCalibration();
+    ui->hueMaxValue->setValue(360);
+    ui->hueMinValue->setValue(0);
+    ui->saturationMaxValue->setValue(360);
+    ui->saturationMinValue->setValue(0);
+    ui->valueMaxValue->setValue(360);
+    ui->valueMinValue->setValue(0);
+    ui->redButton->setChecked(false);
+    ui->greenButton->setChecked(false);
+    ui->blueButton->setChecked(false);
+    ui->yellowButton->setChecked(false);
+    ui->cyanButton->setChecked(false);
+    ui->magentaButton->setChecked(false);
+}
+
+void MainWindow::on_blueButton_toggled(bool checked)
+{
+    hsvProcessor->setBlue(checked);
+}
+
+void MainWindow::on_cyanButton_toggled(bool checked)
+{
+    hsvProcessor->setCyan(checked);
+}
+
+void MainWindow::on_greenButton_toggled(bool checked)
+{
+    hsvProcessor->setGreen(checked);
+}
+
+void MainWindow::on_magentaButton_toggled(bool checked)
+{
+    hsvProcessor->setMagenta(checked);
+}
+
+void MainWindow::on_redButton_toggled(bool checked)
+{
+    hsvProcessor->setRed(checked);
+}
+
+void MainWindow::on_yellowButton_toggled(bool checked)
+{
+    hsvProcessor->setYellow(checked);
 }

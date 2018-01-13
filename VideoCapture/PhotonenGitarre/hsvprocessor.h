@@ -3,6 +3,9 @@
 
 #include "videoprocessor.h"
 #include "midioutput.h"
+#include <string>
+
+using namespace std;
 
 class HSVProcessor : public VideoProcessor
 {
@@ -17,9 +20,17 @@ public:
     void setValueMax (const int value);
     void setValueMin (const int value);
     void saveCalibration ();
+    void setBlue (const bool checked);
+    void setCyan (const bool checked);
+    void setGreen (const bool checked);
+    void setMagenta (const bool checked);
+    void setRed (const bool checked);
+    void setYellow (const bool checked);
 
     //Struct to define the attributes of the objects to be tracked.
     typedef struct {
+        QString color;
+        int startMidiNote;
         int x;
         int y;
         cv::Point center;
@@ -45,12 +56,15 @@ private:
     int saturationMin;
     int valueMax;
     int valueMin;
+    bool blueChecked, cyanChecked, greenChecked, magentaChecked, redChecked, yellowChecked;
     cv::Point center;
-    cv::Mat colorKeying (cv::Mat& hsvFrame, item& currentItem);
+    cv::Mat colorKeying (cv::Mat& hsvFrame, item& currentItem, const int startCol, const int endCol);
     void findCenterOfObject(cv::Mat& image, item& currentItem);
-    void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
-    void drawGridLines(cv::Mat& mat);
-    item setUpItemObject(int x, int y, cv::Point center, int hmin, int hmax, int smin, int smax, int vmin, int vmax);
+    void drawCross(cv::Mat& image, cv::Point center, int length, cv::Scalar color);
+    void drawGridLines(cv::Mat& image);
+    void drawColorNames(cv::Mat& image, QString color, cv::Point center);
+    item setUpItemObject(int x, int y, cv::Point center, int hmin, int hmax, int smin,
+                         int smax, int vmin, int vmax, QString color, int startMidiNote);
 };
 
 #endif // HSVPROCESSOR_H
