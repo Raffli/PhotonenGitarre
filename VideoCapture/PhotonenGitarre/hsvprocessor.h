@@ -2,13 +2,14 @@
 #define HSVPROCESSOR_H
 
 #include "videoprocessor.h"
+#include "midioutput.h"
 
 class HSVProcessor : public VideoProcessor
 {
 public:
     HSVProcessor();
     void startProcessing(const VideoFormat &format) {}
-    cv::Mat process(const cv::Mat &input);
+    cv::Mat process(cv::Mat &input);
     void setHueMax (const int value);
     void setHueMin (const int value);
     void setSaturationMax (const int value);
@@ -37,6 +38,7 @@ public:
     std::vector<item> objects;
 
 private:
+    drumstick::rt::MIDIOutput midiOutput;
     int hueMax;
     int hueMin;
     int saturationMax;
@@ -47,6 +49,7 @@ private:
     cv::Mat colorKeying (cv::Mat& hsvFrame, item& currentItem);
     void findCenterOfObject(cv::Mat& image, item& currentItem);
     void drawCross(cv::Mat& mat, cv::Point center, int length, cv::Scalar color);
+    void drawGridLines(cv::Mat& mat);
     item setUpItemObject(int x, int y, cv::Point center, int hmin, int hmax, int smin, int smax, int vmin, int vmax);
 };
 

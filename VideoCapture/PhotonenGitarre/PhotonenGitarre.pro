@@ -22,3 +22,4 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 include(../opencv/videoengine.pri)
+include(../drumstick/drumstick.pro)

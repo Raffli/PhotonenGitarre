@@ -12,10 +12,10 @@ HSVProcessor::HSVProcessor():
     valueMax(255),
     valueMin(0)
 {
-
+    midiOutput.open("LoopBe Internal MIDI");
 }
 
-cv::Mat HSVProcessor::process(const cv::Mat &input) {
+cv::Mat HSVProcessor::process(cv::Mat &input) {
     // convert to HSV
     Mat hsvFrame;
     cvtColor(input, hsvFrame, CV_BGR2HSV);
@@ -42,9 +42,12 @@ cv::Mat HSVProcessor::process(const cv::Mat &input) {
         dilate(objects[i].threshold, objects[i].threshold, Mat());
 
         findCenterOfObject(objects[i].threshold, objects[i]);
-        qDebug() << objects[i].x << " " << objects[i].y;
-        drawCross(output, objects[i].center, 5, Scalar(0, 0, 255));
+        if (objects[i].y > 0) {
+            midiOutput.sendNoteOn(1, objects[i].y / 4, 127);
+        }
+        drawCross(input, objects[i].center, 5, Scalar(0, 0, 255));
     }
+    drawGridLines(input);
 
     return output;
 }
@@ -105,6 +108,13 @@ void HSVProcessor::findCenterOfObject(Mat &image, item &currentItem){
 void HSVProcessor::drawCross(Mat &image, Point center, int length, Scalar color) {
     line(image, center - Point(0, length), center + Point(0, length), color, 1);
     line(image, center - Point(length, 0), center + Point(length, 0), color, 1);
+}
+
+void HSVProcessor::drawGridLines (Mat &image) {
+    for (unsigned int i = 0; i < 5; i++) {
+        line(image, Point(image.size().width * (i+1) / 6, 0),
+             Point(image.size().width * (i+1) / 6, image.size().height), Scalar(0, 0, 0), 3);
+    }
 }
 
 HSVProcessor::item HSVProcessor::setUpItemObject (int x, int y, cv::Point center, int hmin, int hmax, int smin, int smax, int vmin, int vmax) {

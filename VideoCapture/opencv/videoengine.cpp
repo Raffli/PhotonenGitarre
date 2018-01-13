@@ -69,6 +69,7 @@ void VideoEngine::run()
         while(!stopped)
         {
             cv::Mat cvFrame;
+            cv::Mat processedOriginalFrame;
             if (false == videoCapture.grab()){
                 qDebug() << "grab() failed";
                 break;
@@ -89,14 +90,14 @@ void VideoEngine::run()
                 }
             }
 
-            // queue the image to the gui
-            emit sendInputImage(cvMatToQImage(cvFrame));
-
             // Process Video Frame
             if (processor != 0){
-                cvFrame = processor->process(cvFrame);
+                processedOriginalFrame = cvFrame;
+                cvFrame = processor->process(processedOriginalFrame);
             }
 
+            // queue the image to the gui
+            emit sendInputImage(cvMatToQImage(processedOriginalFrame));
             emit sendProcessedImage(cvMatToQImage(cvFrame));
 
             // check if stopped

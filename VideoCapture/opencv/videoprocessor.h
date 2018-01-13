@@ -9,7 +9,7 @@ class VideoProcessor
 public:
     virtual ~VideoProcessor(){}
     virtual void startProcessing(const VideoFormat& format) = 0;
-    virtual cv::Mat process(const cv::Mat&source) = 0;
+    virtual cv::Mat process(cv::Mat&source) = 0;
 };
 
 

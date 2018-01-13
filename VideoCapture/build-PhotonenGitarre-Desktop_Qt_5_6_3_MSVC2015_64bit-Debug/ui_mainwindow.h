@@ -17,6 +17,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -45,6 +46,12 @@ public:
     QSpinBox *valueMinValue;
     QSpinBox *valueMaxValue;
     QPushButton *saveButton;
+    QRadioButton *redButton;
+    QRadioButton *greenButton;
+    QRadioButton *yellowButton;
+    QRadioButton *blueButton;
+    QRadioButton *magentaButton;
+    QRadioButton *cyanButton;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -118,6 +125,24 @@ public:
         saveButton->setFont(font);
         saveButton->setAutoDefault(false);
         saveButton->setFlat(false);
+        redButton = new QRadioButton(centralWidget);
+        redButton->setObjectName(QStringLiteral("redButton"));
+        redButton->setGeometry(QRect(640, 500, 50, 20));
+        greenButton = new QRadioButton(centralWidget);
+        greenButton->setObjectName(QStringLiteral("greenButton"));
+        greenButton->setGeometry(QRect(690, 500, 60, 20));
+        yellowButton = new QRadioButton(centralWidget);
+        yellowButton->setObjectName(QStringLiteral("yellowButton"));
+        yellowButton->setGeometry(QRect(800, 500, 60, 20));
+        blueButton = new QRadioButton(centralWidget);
+        blueButton->setObjectName(QStringLiteral("blueButton"));
+        blueButton->setGeometry(QRect(750, 500, 50, 20));
+        magentaButton = new QRadioButton(centralWidget);
+        magentaButton->setObjectName(QStringLiteral("magentaButton"));
+        magentaButton->setGeometry(QRect(910, 500, 70, 20));
+        cyanButton = new QRadioButton(centralWidget);
+        cyanButton->setObjectName(QStringLiteral("cyanButton"));
+        cyanButton->setGeometry(QRect(860, 500, 50, 20));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -140,6 +165,12 @@ public:
         valueMaxLabel->setText(QApplication::translate("MainWindow", "Value-Max:", Q_NULLPTR));
         valueMinLabel->setText(QApplication::translate("MainWindow", "Value-Min:", Q_NULLPTR));
         saveButton->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
+        redButton->setText(QApplication::translate("MainWindow", "Red", Q_NULLPTR));
+        greenButton->setText(QApplication::translate("MainWindow", "Green", Q_NULLPTR));
+        yellowButton->setText(QApplication::translate("MainWindow", "Yellow", Q_NULLPTR));
+        blueButton->setText(QApplication::translate("MainWindow", "Blue", Q_NULLPTR));
+        magentaButton->setText(QApplication::translate("MainWindow", "Magenta", Q_NULLPTR));
+        cyanButton->setText(QApplication::translate("MainWindow", "Cyan", Q_NULLPTR));
     } // retranslateUi
 
 };
