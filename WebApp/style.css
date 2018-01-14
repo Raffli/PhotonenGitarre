@@ -28,7 +28,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: -40px;
+    margin-left: 40px;
 
 }
 #greenDiv{
@@ -74,7 +74,7 @@ h1 {
     width: 12%;
     height:100%;
     opacity: 0.2;
-    margin-left: 40px;
+    margin-left: -40px;
 
 }
 
