@@ -70,7 +70,11 @@ cv::Mat HSVProcessor::process(cv::Mat &input) {
 
         findCenterOfObject(objects[i].threshold, objects[i]);
         if (objects[i].y > 0) {
-            midiOutput.sendNoteOn(1, objects[i].startMidiNote + objects[i].y / 40, 127);
+            int note = objects[i].startMidiNote + objects[i].y / 40;
+            if (note != objects[i].lastNote) {
+               midiOutput.sendNoteOn(1, objects[i].startMidiNote + objects[i].y / 40, 127);
+            }
+            objects[i].lastNote = objects[i].startMidiNote + objects[i].y / 40;
         }
         drawCross(input, objects[i].center, 5, Scalar(0, 0, 255));
         drawColorNames(input, objects[i].color, objects[i].center);
@@ -154,6 +158,7 @@ HSVProcessor::item HSVProcessor::setUpItemObject (int x, int y, cv::Point center
     item temp;
     temp.color = color;
     temp.startMidiNote = startMidiNote;
+    temp.lastNote = 0;
     temp.x = x;
     temp.y = y;
     temp.center = center;

@@ -31,6 +31,7 @@ public:
     typedef struct {
         QString color;
         int startMidiNote;
+        int lastNote;
         int x;
         int y;
         cv::Point center;
