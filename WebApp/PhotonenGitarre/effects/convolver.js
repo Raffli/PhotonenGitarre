@@ -9,7 +9,7 @@ convolverSelectList.addEventListener("change", function(e){
 
 function loadImpulseResponse(name){
     var request = new XMLHttpRequest();
-    request.open("GET",  ("../../PhotonenGitarre/impulseResponses/" + name + ".wav"), true);
+    request.open("GET",  ("PhotonenGitarre/effects/impulseResponses/" + name + ".wav"), true);
     request.responseType = "arraybuffer";
 
     request.onload = function () {

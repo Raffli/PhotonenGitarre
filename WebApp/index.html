@@ -1,46 +1,67 @@
 <!doctype html>
 <html>
     <head>
-        <title>Photonen-Gitarre</title>
+        <title>Licht-Saiter</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <h1>Photonen Gitarre</h1>
-        <br>
-        <select id="select">
-        </select>
-        <div id="gainDiv">Volume
-            <input type="range" min="0" max="100" value="50" class="slider" id="gainSlider">
-            <span id="gainOutput" class="output">50</span>
+        <div class = content>
+            <h1>Licht Saiter</h1>
+            <div>
+                Instrument:
+                <select id="select">
+                </select>
+                &nbsp&nbsp
+                Room Type:
+                <select id="convolverSelectList">
+                    <option value="room">Room</option>
+                    <option value="cave">Cave</option>
+                    <option value="church">Church</option>
+                    <option value="garage">Garage</option>
+                </select>
+            </div>
+            <div id = "controlsDiv">
+                <div id="gainDiv">Volume  
+                    <input type="range" min="0" max="100" value="50" class="slider" id="gainSlider">
+                    <span id="gainOutput" class="output">50</span>
+                </div>
+                <div id="attackDiv">Attack 
+                    <input type="range" min="0" max="100" value="10" class="slider" id="attackSlider">
+                    <span id="attackOutput" class="output">0.1</span>
+                </div>
+                <div id="releaseDiv">Release
+                    <input type="range" min="0" max="100" value="10" class="slider" id="releaseSlider">
+                    <span id="releaseOutput" class="output">0.1</span>
+                </div>
+                <div id="durationDiv">Duration
+                    <input type="range" min="0" max="500" value="100" class="slider" id="durationSlider">
+                    <span id="durationOutput" class="output">1</span>
+                </div>
+                <div id="sustainDiv">Sustain
+                    <input type="range" min="0" max="100" value="50" class="slider" id="sustainSlider">
+                    <span id="sustainOutput" class="output">0.5</span>
+                </div>
+                <div id="decayDiv">Decay
+                    <input type="range" min="0" max="100" value="50" class="slider" id="decaySlider">
+                    <span id="decayOutput" class="output">0.5</span>
+                </div>
+            </div>
+            <div class="background">
+                <div id = "magentaDiv"></div>
+                
+                <div id = "cyanDiv"></div>
+
+                <div id = "yellowDiv"></div>
+
+                <div id = "blueDiv"></div>
+
+                <div id = "greenDiv"></div>
+
+                <div id = "redDiv"></div>
+
+            </div>
         </div>
-        <div id="attackDiv">Attack
-            <input type="range" min="0" max="100" value="10" class="slider" id="attackSlider">
-            <span id="attackOutput" class="output">0.1</span>
-        </div>
-        <div id="releaseDiv">Release
-            <input type="range" min="0" max="100" value="10" class="slider" id="releaseSlider">
-            <span id="releaseOutput" class="output">0.1</span>
-        </div>
-        <div id="durationDiv">Duration
-            <input type="range" min="0" max="500" value="100" class="slider" id="durationSlider">
-            <span id="durationOutput" class="output">1</span>
-        </div>
-        <div id="sustainDiv">Sustain
-            <input type="range" min="0" max="100" value="50" class="slider" id="sustainSlider">
-            <span id="sustainOutput" class="output">0.5</span>
-        </div>
-        <div id="decayDiv">Decay
-            <input type="range" min="0" max="100" value="50" class="slider" id="decaySlider">
-            <span id="decayOutput" class="output">0.5</span>
-        </div>
-        <div id="convolverDiv">Room Type
-            <select id="convolverSelectList">
-                <option value="room">Room</option>
-                <option value="cave">Cave</option>
-                <option value="church">Church</option>
-                <option value="garage">Garage</option>
-            </select>
-        </div>
+            
         <script src="bundle.js"></script>
         <script src="node_modules/soundfont-player/dist/soundfont-player.js"></script>
         <script type="text/javascript" src= "PhotonenGitarre/photonenGitarre.js"></script>
