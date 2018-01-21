@@ -1,4 +1,4 @@
-# PhotonenGitarre
+# Licht-Saiter
 
 Hier kann man die WebApp des Licht-Saiters aufrufen (Funktioniert nur unter Chrome)
 
